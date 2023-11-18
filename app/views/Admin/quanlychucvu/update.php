@@ -17,8 +17,7 @@
             </div>
             <div class="card-body">
             <div class="form-group">
-                <label for="inputName">Số thứ tự chức vụ</label>
-                <input type="text" id="inputName" class="form-control" value="<?php if(isset($id_chuc_vu)&&($id_chuc_vu>0)) echo $id_chuc_vu;?>" name="id_chuc_vu">
+                <input type="hidden" id="inputName" class="form-control" value="<?php if(isset($id_chuc_vu)&&($id_chuc_vu>0)) echo $id_chuc_vu;?>" name="id_chuc_vu">
               </div>
               <div class="form-group">
                 <label for="inputName">Tên chức vụ</label>

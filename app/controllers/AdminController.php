@@ -3,9 +3,11 @@ include "../models/pdo.php";
 include "../models/bienthe.php";
 include "../models/tintuc.php";
 include "../models/chucvu.php";
+include "../models/casan.php";
+include "../models/danhmuc.php";
 ?>
 <?
-include '../models/AdminModel.php';
+include "../models/AdminModel.php";
 ?>
 <?php 
 include "../views/Admin/layout/header.php";
@@ -86,36 +88,90 @@ if (isset($_GET['act']) && ($_GET['act']!= "")) {
 
         //Quản lý ca sân
         case 'dscasan':
+            $listcasan = loadAllCASAN();
             include '../views/Admin/quanlycasan/danhsachcasan.php';
             break;
 
         case 'themcasan':
+            if (isset($_POST['themcasan'])) {
+                $ten_ca = $_POST['tenca'];
+                $thoi_gian_bd = $_POST['thoigianbd'];
+                $thoi_gian_kt = $_POST['thoigiankt'];
+                insert_casan($ten_ca, $thoi_gian_bd, $thoi_gian_kt);
+                $thongbao = "Thêm thành công";
+            }
             include '../views/Admin/quanlycasan/add.php';
             break;
 
         case 'suacasan':
+            if (isset($_GET["id_ca"]) && $_GET["id_ca"] > 0) {
+                $id_ca = $_GET["id_ca"];
+                $cs = loadOneCASAN($id_ca);
+            }
             include '../views/Admin/quanlycasan/update.php';
             break;
+        case 'updatecasan':
+            if (isset($_POST['capnhat'])) {
+                $id_ca = $_POST["idcasan"];
+                $ten_ca = $_POST['tenca'];
+                $thoi_gian_bd = $_POST['thoigianbd'];
+                $thoi_gian_kt = $_POST['thoigiankt'];
+                update_casan($id_ca, $ten_ca, $thoi_gian_bd, $thoi_gian_kt);
+                $thongbao = "Cập nhật thành công";
+            }
 
+            $listcasan = loadAllCASAN();
+            include '../views/Admin/quanlycasan/danhsachcasan.php';
+            break;
         case 'xoacasan':
-            include '../views/Admin/quanlycasan/delete.php';
+            if (isset($_GET["id_ca"]) && $_GET["id_ca"] > 0) {
+                $id_ca = $_GET["id_ca"];
+                delete_casan($id_ca);
+            }
+            $listcasan = loadAllCASAN();
+            include '../views/Admin/quanlycasan/danhsachcasan.php';
             break;
         
         //Quản lý danh mục
         case 'dsdanhmuc':
+            $listdanhmuc = loadAll();
             include '../views/Admin/quanlydanhmuc/danhsachdanhmuc.php';
             break;
 
         case 'themdanhmuc':
+            if (isset($_POST['themmoi'])) {
+                $tendanhmuc = $_POST['tendanhmuc'];
+                insert_danhmuc($tendanhmuc);
+                $thongbao = "Thêm thành công";
+            }
             include '../views/Admin/quanlydanhmuc/add.php';
             break;
 
         case 'suadanhmuc':
+            if (isset($_GET["id_danh_muc"]) && $_GET["id_danh_muc"] > 0) {
+                $id_danh_muc = $_GET["id_danh_muc"];
+                $dm = loadOne($id_danh_muc);
+            }
             include '../views/Admin/quanlydanhmuc/update.php';
             break;
+        case 'updatedanhmuc':
+            if (isset($_POST['capnhat'])) {
+                $id_danh_muc = $_POST["iddanhmuc"];
+                $ten_danh_muc = $_POST['tendanhmuc'];
+                update_danhmuc($id_danh_muc, $ten_danh_muc);
+                $thongbao = "Cập nhật thành công";
+            }
 
+            $listdanhmuc = loadAll();
+            include '../views/Admin/quanlydanhmuc/danhsachdanhmuc.php';
+            break;
         case 'xoadanhmuc':
-            include '../views/Admin/quanlydanhmuc/delete.php';
+            if (isset($_GET["id_danh_muc"]) && $_GET["id_danh_muc"] > 0) {
+                $id_danh_muc = $_GET["id_danh_muc"];
+                delete_danhmuc($id_danh_muc);
+            }
+            $listdanhmuc = loadAll();
+            include '../views/Admin/quanlydanhmuc/danhsachdanhmuc.php';
             break;
 
         //Quản lý đặt sân
