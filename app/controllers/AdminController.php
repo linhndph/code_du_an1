@@ -5,6 +5,7 @@ include "../models/tintuc.php";
 include "../models/chucvu.php";
 include "../models/casan.php";
 include "../models/danhmuc.php";
+include "../models/quanlyhethong.php";
 ?>
 <?
 include "../models/AdminModel.php";
@@ -340,17 +341,58 @@ if (isset($_GET['act']) && ($_GET['act']!= "")) {
             $dschucvu=loadall_chuc_vu();
             include '../views/Admin/quanlychucvu/danhsachchucvu.php';
             break;
+
+
+            // quản lý hệ thống
         case 'dsquanlyhethong':
+            $dsht=loadall_hethong();
+            
             include '../views/Admin/quanlyhethong/danhsachquanlyhethong.php';
-            break;
+            break;  
         case 'themquanlyhethong':
+            if(isset($_POST['themhethong'])&&($_POST['themhethong'])){
+                $id=$_POST['id'];
+                $ten_img=$_POST['ten_img'];
+                $img = $_FILES['img']['name'];
+ 
+                $target_dir = "../views/Admin/quanlyhethong/anhhethong/";
+                $target_file = $target_dir.basename($_FILES['img']['name']);
+
+                if(move_uploaded_file($_FILES['img']['tmp_name'], $target_file)){
+                   echo "Bạn đã upload ảnh thành công";
+                }else{
+                   echo "Upload ảnh không thành công";
+                }            
+                insert_hethong($id, $ten_img, $img);
+                $thongbao="Thêm thành công";
+            }
             include '../views/Admin/quanlyhethong/add.php';
             break;
         case 'suaquanlyhethong':
+            if(isset($_GET['id'])&&($_GET['id']>0)){
+                $id=$_GET['id'];
+                $ht=loadone_tin_tuc($id);
+            }
             include '../views/Admin/quanlyhethong/update.php';
             break;
+        case 'updatequanlyhethong':
+            if(isset($_POST['capnhat'])&&($_POST['capnhat'])){
+                $id = $_POST['id'];
+                $ten_img = $_POST['ten_img'];
+                $img = $_POST['img']; 
+
+                update_hethong($id,$ten_img,$img);
+                $thongbao="Cập nhật thành công";
+            }
+            $dsht=loadall_hethong();
+            include '../views/Admin/quanlyhethong/danhsachquanlyhethong.php';
+            break;
         case 'xoaquanlyhethong':
-            include '../views/Admin/quanlyhethong/delete.php';
+            if(isset($_GET['id'])&&($_GET['id']>0)){
+                delete_hethong($_GET['id']);
+            }
+            $dsht=loadall_hethong();
+            include '../views/Admin/quanlyhethong/danhsachquanlyhethong.php';
             break;
 
 

@@ -61,38 +61,49 @@
                   </tr>
               </thead>
               <tbody>
-                  <tr>
-                      <td>
-                          1
-                      </td>
-                      <td>
-                          <a>
-                              Banner 2023
-                          </a>                     
-                      </td>
-                      <td>                   
-                              <li class="list-inline-item">
-                                  <img alt="Avatar" class="table-avatar" src="../../dist/img/avatar.png">
-                              </li>
-                      </td>                
-                      <td class="project-actions text-right">
-                          <a class="btn btn-primary btn-sm" href="AdminController.php?act=themquanlyhethong">
-                              <i class="fas fa-folder">
-                              </i>
-                              Thêm
-                          </a>
-                          <a class="btn btn-info btn-sm" href="AdminController.php?act=suaquanlyhethong">
-                              <i class="fas fa-pencil-alt">
-                              </i>
-                              Sửa
-                          </a>
-                          <a class="btn btn-danger btn-sm" href="AdminController.php?act=xoaquanlyhethong">
-                              <i class="fas fa-trash">
-                              </i>
-                              Xóa
-                          </a>
-                      </td>
-                  </tr>
+              <?php
+            foreach($dsht as $ds){
+              extract($ds);
+              $themht="AdminController.php?act=themquanlyhethong&id=".$id;
+              $suaht="AdminController.php?act=suaquanlyhethong&id=".$id;
+              $xoaht="AdminController.php?act=xoaquanlyhethong&id=".$id;
+              $hinhpath="../views/Admin/quanlyhethong/anhhethong/".$img;
+                    if(is_file($hinhpath)){
+                        $hinhpath="<img src= '".$hinhpath."' width='100px' height='100px'>";
+                    }else{
+                        $hinhpath="No file img!";
+                    }
+              
+              echo '
+              <tr>
+              <td>'.$id.'</td>
+              <td>'.$ten_img.'</td>
+              <td class="project-actions text-right">
+                <li class="list-inline-item">
+                  '.$hinhpath.'
+                </li>
+              </td>
+  
+              <td>
+              <a class="btn btn-info btn-sm" href="'.$themht.'">
+              <i class="fas fa-pencil-alt">
+              </i>
+              Thêm
+            </a>
+                <a class="btn btn-info btn-sm" href="'.$suaht.'">
+                  <i class="fas fa-pencil-alt">
+                  </i>
+                  Sửa
+                </a>
+                <a class="btn btn-danger btn-sm" href="'.$xoaht.'">
+                  <i class="fas fa-trash"></i>
+                  Xóa
+                </a>
+              </td>
+            </tr>
+              ';
+            }
+          ?>
 
 
               </tbody>

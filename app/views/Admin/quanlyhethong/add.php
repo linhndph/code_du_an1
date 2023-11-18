@@ -1,4 +1,5 @@
 <h2>Thêm quản lý hệ thống:</h2>
+<form action="AdminController.php?act=themquanlyhethong" method="post" enctype="multipart/form-data" >
 <div class="card card-primary">
             <div class="card-header">
               <h3 class="card-title">Thêm thông tin quản lý</h3>
@@ -12,17 +13,22 @@
             <div class="card-body">
             <div class="form-group">
                 <label for="inputName">Số thứ tự</label>
-                <input type="text" id="inputName" class="form-control" value="">
+                <input type="text" id="inputName" class="form-control" value="" name="id">
               </div>
               <div class="form-group">
                 <label for="inputName">Tên ảnh</label>
-                <input type="text" id="inputName" class="form-control" value="">
+                <input type="text" id="inputName" class="form-control" value="" name="ten_img">
               </div>
               <div class="form-group">
                 <label for="inputDescription">Ảnh</label>
-                <input type="file">
+                <input type="file" name="img">
               </div>
-              <input type="submit" class="btn btn-outline-danger" name="themsan" value="Thêm">
+              <input type="submit" class="btn btn-outline-danger" name="themhethong" value="Thêm">
             </div>
             <!-- /.card-body -->
           </div>
+          <?php if(isset($thongbao)&&($thongbao!="")){
+                echo $thongbao;
+           }
+           ?>
+</form>
