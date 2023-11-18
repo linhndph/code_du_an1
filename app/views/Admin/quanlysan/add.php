@@ -39,7 +39,7 @@
                 </select>
               </div>
 
-              <button type="button" class="btn btn-outline-danger">Thêm sân</button>
+              <input type="submit" class="btn btn-outline-danger" name="themsan" value="Thêm sân">
             </div>
             <!-- /.card-body -->
           </div>

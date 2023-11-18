@@ -340,6 +340,18 @@ if (isset($_GET['act']) && ($_GET['act']!= "")) {
             $dschucvu=loadall_chuc_vu();
             include '../views/Admin/quanlychucvu/danhsachchucvu.php';
             break;
+        case 'dsquanlyhethong':
+            include '../views/Admin/quanlyhethong/danhsachquanlyhethong.php';
+            break;
+        case 'themquanlyhethong':
+            include '../views/Admin/quanlyhethong/add.php';
+            break;
+        case 'suaquanlyhethong':
+            include '../views/Admin/quanlyhethong/update.php';
+            break;
+        case 'xoaquanlyhethong':
+            include '../views/Admin/quanlyhethong/delete.php';
+            break;
 
 
 

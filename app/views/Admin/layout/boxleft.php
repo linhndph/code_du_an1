@@ -65,6 +65,10 @@ include "../views/Admin/quanlytaikhoan/navitem.php";
 <?php
 include "../views/Admin/quanlychucvu/navitem.php";
 ?>
+<?php
+include "../views/Admin/quanlyhethong/navitem.php";
+?>
+
 
 
 
